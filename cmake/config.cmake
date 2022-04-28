@@ -2,6 +2,7 @@
 # /.packages
 set(SFML_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/extern/SFML)
 set(GLEW_PACKAGE_DIR ${CMAKE_SOURCE_DIR}/extern/GLEW)
+set(OISK_RESOURCE_DIR ${CMAKE_SOURCE_DIR}/resource)
 
 # /.version
 set(OISK_VERSION_MAJOR 1)

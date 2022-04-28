@@ -20,4 +20,8 @@ add_executable(${OISK_NAME} ${OISK_SOURCE})
 # /.linking
 target_link_libraries(${OISK_NAME} ${GLEW_DLLS_OUT} ${SFML_DLLS_OUT})
 
+# /.install target
 install(TARGETS ${OISK_NAME} DESTINATION ${TARGET_DIR})
+
+# /.install resource
+include(${CMAKE_SOURCE_DIR}/cmake/install_resource.cmake)

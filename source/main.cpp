@@ -25,6 +25,20 @@ int main(int argc, char* argv[])
         std::cout << "Glew Loaded Success" << std::endl;
     }
 
+    sf::Font font;
+    if (!font.loadFromFile("resource/font/Nouveau_IBM.ttf"))
+        return EXIT_FAILURE;
+
+    sf::Text text("Hello World", font);
+    text.setFillColor(sf::Color(255, 0, 0, 170));
+    text.setPosition({280.f, 450.f});
+
+    // Enable Z-buffer read and write
+    glEnable(GL_DEPTH_TEST);
+    glDepthMask(GL_TRUE);
+    glClearDepth(1.f);
+    glViewport(0,0, 400, 300);
+
     sf::Event event;
     while (window.isOpen())
     {
@@ -37,12 +51,18 @@ int main(int argc, char* argv[])
             }
             else if(event.type == sf::Event::Resized)
             {
-                glViewport(0,0, event.size.width, event.size.height);
+                glViewport(0,0, event.size.width/2, event.size.height/2);
+                window.setView(sf::View(sf::FloatRect(0.f, 0.f, event.size.width, event.size.height)));
             }
             
         }
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(255, 255, 0, 1);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        window.pushGLStates();
+        window.draw(text);
+        window.popGLStates();
+
         window.display();
         sf::sleep(sf::milliseconds(10));
     }
